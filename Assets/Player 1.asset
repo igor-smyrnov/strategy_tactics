@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Player 1
   m_EditorClassIdentifier: 
   name: Player 1
-  color: {r: 1, g: 1, b: 0, a: 1}
+  color: {r: 0.10980393, g: 0.14100662, b: 0.8117647, a: 1}
   allyFractions: []
   enemyFractions:
   - {fileID: 11400000, guid: 361fbd154c5df734fae7092fa3cb2794, type: 2}

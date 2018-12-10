@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class UnitController : MonoBehaviour {
@@ -11,6 +12,9 @@ public class UnitController : MonoBehaviour {
     public bool isSelected = false;
     public float radius = 3f;
     private float stoppingDistance = 0f;
+
+    // Model
+    public List<SkinnedMeshRenderer> fractionMeshRenderers = new List<SkinnedMeshRenderer>();
 
     // Unit stats
     public float maxHealth = 100;
@@ -51,6 +55,7 @@ public class UnitController : MonoBehaviour {
         CheckLight();
         CheckAttackCoolDown();
         CheckTarget();
+        CheckFractionColor();
     }
 
     public void MoveToPoint(Vector3 point)
@@ -188,5 +193,19 @@ public class UnitController : MonoBehaviour {
         Vector3 direction = (targetUnit.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+
+    private void CheckFractionColor()
+    {
+        if (fractionMeshRenderers.Count > 0)
+        {
+            foreach(SkinnedMeshRenderer meshRenderer in fractionMeshRenderers)
+            {
+                if (meshRenderer.material.color != fraction.color)
+                {
+                    meshRenderer.material.color = fraction.color;
+                }
+            }
+        }
     }
 }
